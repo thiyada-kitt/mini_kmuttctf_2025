@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .course-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .course-card {
+            width: 200px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .course-card:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Course Registration Portal</h1>
+    <p>Student ID: 6x0905004xx - Please select your course</p>
+    
+    <div class="course-list">
+        <div class="course-card" onclick="redirect('gen351')">
+            <h3>GEN351</h3>
+            <p>Modern Management and Leadership</p>
+        </div>
+        
+        <div class="course-card" onclick="redirect('css336')">
+            <h3>CSS336</h3>
+            <p>Software Engineering II</p>
+        </div>
+        
+        <div class="course-card" onclick="redirect('nst311')">
+            <h3>NST311</h3>
+            <p>Computer Science for Contemporary Science</p>
+        </div>
+        
+        <div class="course-card" onclick="redirect('css391')">
+            <h3>CSS391</h3>
+            <p>Seminar in Applied Computer Science</p>
+        </div>
+        
+        <div class="course-card" onclick="redirect('css382')">
+            <h3>CSS382</h3>
+            <p>Accounting and Finance</p>
+        </div>
+        
+        <div class="course-card cyber-card" onclick="redirect('css467')">
+            <h3>CSS467</h3>
+            <p>Cybersecurity</p>
+        </div>
+        <div class="course-card" onclick="redirect('css423')">
+            <h3>CSS423</h3>
+            <p>Cybersecurity</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize JWT token
+        const payload = {
+            userId: "6x0905004xx",
+            role: "student",
+            exp: Date.now() + 3600000
+        };
+
+        const secret = "yearlyleak2023";
+        const token = btoa(JSON.stringify(payload)) + "." + btoa(secret);
+        localStorage.setItem("jwtToken", token);
+
+        function redirect(course) {
+            if (course === "css467") {
+                const storedToken = localStorage.getItem("jwtToken");
+                if (storedToken) {
+                    try {
+                        const [payloadPart, secretPart] = storedToken.split(".");
+                        const decodedPayload = JSON.parse(atob(payloadPart));
+
+                        if (decodedPayload.role === "admin") {
+                            window.location.href = `courses/${course}.html`;
+                        } else {
+                            alert("Access denied. Only admin can view this course.");
+                        }
+                    } catch (e) {
+                        alert("Invalid token");
+                    }
+                } else {
+                    alert("No authentication token found");
+                }
+            } else {
+                window.location.href = `courses/${course}.html`;
+            }
+        }
+
+        console.log("Have you checked the JWT token in localStorage?");
+        console.log("The token might be vulnerable to tampering...");
+    </script>
+</body>
+</html>
