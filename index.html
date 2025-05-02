@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Registration</title>
+    <title>kmutt cyber homework</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-    <h1>Course Registration Portal</h1>
+    <h1>Hello World</h1>
     <p>Student ID: 6x0905004xx - Please select your course</p>
     
     <div class="course-list">
@@ -61,7 +61,8 @@
             <p>Accounting and Finance</p>
         </div>
         
-        <div class="course-card cyber-card" onclick="redirect('css467')">
+        <div class="cyber-card" onclick="redirect('css467')"> 
+            <!-- ทำให้ไม่แสดงจนกว่าจะเปลี่ยนสิทธิ์การเข้าถึงเป็น admin -->
             <h3>CSS467</h3>
             <p>Cybersecurity</p>
         </div>
@@ -79,7 +80,6 @@
             exp: Date.now() + 3600000
         };
 
-        const secret = "yearlyleak2023";
         const token = btoa(JSON.stringify(payload)) + "." + btoa(secret);
         localStorage.setItem("jwtToken", token);
 
@@ -106,9 +106,9 @@
                 window.location.href = `courses/${course}.html`;
             }
         }
-
+        console.log("Hint!: secret course is css467");
         console.log("Have you checked the JWT token in localStorage?");
-        console.log("The token might be vulnerable to tampering...");
+        console.log("The token might be vulnerable to tampering...???");
     </script>
 </body>
 </html>
