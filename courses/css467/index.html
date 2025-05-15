@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS467 - Cybersecurity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .flag-box {
+            background: #f0f0f0;
+            padding: 20px;
+            margin: 30px auto;
+            width: 60%;
+            border-radius: 5px;
+        }
+        .admin-only {
+            display: none;
+        }
+        #access-message {
+            color: green;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-content">
+        <h1>CSS467 - Cybersecurity</h1>
+        <p>Welcome to the Cybersecurity course!</p>
+        <div id="access-message"></div>
+        
+        <div class="flag-box">
+            <h3>Flag Information</h3>
+            <p>This course contains important security information.</p>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem("jwtToken");
+
+        if (token !== "admin") {
+            document.body.innerHTML = `
+                <h1>404 Not Found</h1>
+                <p>The page you are looking for does not exist.</p>
+            `;
+            console.log("admin might see something.");
+        } else {
+            document.getElementById("access-message").textContent = "Admin access granted!";
+            document.querySelectorAll(".admin-only").forEach(el => {
+                el.style.display = "block";
+            });
+            console.log("/rotrotrot/: frpErg");
+        }
+    </script>
+</body>
+</html>
